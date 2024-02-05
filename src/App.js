@@ -1,22 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import Dataform from './components/FormComponent/Dataform.js';
+import React, { useState } from 'react';
+import DataChart from './components/ChartComponent/DataChart.js';
 
 function App() {
+  const [submitButtonClicked, setSubmitButtonClicked] = useState(null);
+  const [scatterPointClicked, setScatterPointClicked] = useState({
+    id: '',
+    x: '',
+    y: '',
+    label: '',
+  });
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="chart-container">
+          <DataChart
+            submitButtonClickRecord={submitButtonClicked}
+            scatterPointEmit={setScatterPointClicked}
+          />
+        </div>
+        <div className="form-container">
+          <Dataform
+            submitButtonEmit={setSubmitButtonClicked}
+            clickedScatterPointData={scatterPointClicked}
+          />
+        </div>
       </header>
     </div>
   );
